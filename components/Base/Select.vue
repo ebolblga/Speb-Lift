@@ -1,27 +1,31 @@
 <script setup lang="ts">
-const modelValue = defineModel()
-const { options } = defineProps<{
-    options: {
-        key: string
-        value: string
-    }[]
+const props = defineProps<{
+    id: string
+    enumValues: Record<string, string | number>
+    modelValue: string | number | null
 }>()
+
+const emit = defineEmits<{
+    (e: 'update:modelValue', value: string | number | null): void
+}>()
+
+const options = computed(() => Object.values(props.enumValues))
+
+const handleChange = (event: Event) => {
+    const target = event.target as HTMLSelectElement
+    const selectedValue = target.value as string | number
+    emit('update:modelValue', selectedValue)
+}
 </script>
+
 <template>
-    <div>
-        <label :for="$attrs.id" class="text-black">
-            <slot />
-        </label>
-        <select
-            v-bind="$attrs"
-            v-model="modelValue"
-            class="w-full p-4 rounded-lg border border-gray mb-3">
-            <option
-                v-for="option in options"
-                :value="option.key || option.value"
-                @change="$emit('update:modelValue', option.value)">
-                {{ option.value }}
-            </option>
-        </select>
-    </div>
+    <select
+        id="id"
+        :value="modelValue"
+        class="w-full bg-background2 border border-primary rounded-md p-1 m-2"
+        @change="handleChange">
+        <option v-for="option in options" :key="option" :value="option">
+            {{ option }}
+        </option>
+    </select>
 </template>

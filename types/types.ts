@@ -1,6 +1,23 @@
 export interface Record {
-    direction: string
-    timing: number
+    direction: Direction
+    seconds: number
     date: Date
-    station: number
+    station: Station
+}
+
+interface RecordSerialized {
+    direction: Direction
+    timing: number
+    date: string
+    station: Station
+}
+
+export enum Direction {
+    up = 'Up',
+    down = 'Down',
+}
+
+export enum Station {
+    top = '28',
+    bottom = '32',
 }

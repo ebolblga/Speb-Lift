@@ -10,7 +10,7 @@ useHead({
     link: [
         {
             rel: 'prefetch',
-            href: '/Montserrat-Regular.ttf',
+            href: '/FiraCode-VariableFont_wght.ttf',
             as: 'font',
             type: 'font/woff2',
             crossorigin: 'anonymous',
@@ -31,14 +31,15 @@ useHead({
 <style>
 body {
     font-size: 14px;
-    font-family: Montserrat;
+    font-family: Fara Code;
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/Montserrat-Regular.ttf') format('truetype');
+    font-family: 'Fara Code';
+    src: url('/FiraCode-VariableFont_wght.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 .scrollbar::-webkit-scrollbar {
