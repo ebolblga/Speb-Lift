@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useLocalStorage } from '@vueuse/core'
 import { Direction, Station, type Record } from '@types'
 
 const isTimerRunning = ref<boolean>(false)
@@ -7,6 +8,7 @@ const timeElapsed = ref<number>(0)
 let interval: ReturnType<typeof setInterval>
 const selectedDirection = ref<Direction>(Direction.up)
 const selectedStation = ref<Station>(Station.top)
+const records = useLocalStorage<Record[]>('my-records', [])
 
 function handleTimer() {
     if (isTimerPaused.value) {
@@ -23,6 +25,10 @@ function handleTimer() {
 }
 
 function stopTimer() {
+    timerCleanup()
+}
+
+function timerCleanup() {
     clearInterval(interval)
     isTimerRunning.value = false
     isTimerPaused.value = true
@@ -30,6 +36,11 @@ function stopTimer() {
 }
 
 function saveRecord() {
+    if (timeElapsed.value === 0) {
+        console.warn('Not enough time has passed')
+        return
+    }
+
     const newRecord: Record = {
         direction: selectedDirection.value,
         seconds: timeElapsed.value,
@@ -37,17 +48,26 @@ function saveRecord() {
         station: selectedStation.value,
     }
 
-    console.log(newRecord)
+    timerCleanup()
+
+    records.value.push(newRecord)
+    console.log('my-records: ', records.value)
 }
 </script>
 <template>
     <div class="h-full flex justify-center">
-        <div class="w-[75vw] my-auto pb-24">
+        <div class="w-[85vw] max-w-[900px] my-auto pb-24">
             <TheTimer :seconds="timeElapsed" />
             <div class="flex flex-row">
                 <BaseButton @click="handleTimer">
-                    <span v-if="isTimerPaused">Start</span>
-                    <span v-else>Stop</span>
+                    <div
+                        v-if="isTimerPaused"
+                        class="flex items-center justify-center">
+                        <Icon name="mdi:play" size="19" />
+                    </div>
+                    <div v-else class="flex items-center justify-center">
+                        <Icon name="material-symbols:pause" size="19" />
+                    </div>
                 </BaseButton>
                 <BaseButton v-if="isTimerRunning" @click="stopTimer">
                     Reset
