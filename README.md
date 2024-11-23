@@ -2,6 +2,8 @@
 
 ## Small utility I needed to minimize average travel time, don't mind checking this project out...
 
+![image](https://github.com/user-attachments/assets/42f7fdd0-1849-4f84-af29-69ba97a11247)
+
 ### Setup with [Node.js](https://nodejs.org/en/)
 
 ```bash
