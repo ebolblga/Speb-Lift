@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         '@nuxt/eslint',
         '@nuxt/fonts',
         '@nuxt/icon',
+        '@vite-pwa/nuxt',
     ],
     tailwindcss: {
         cssPath: ['~/assets/css/tailwind.css', { injectPosition: 'first' }],

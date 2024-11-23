@@ -5,7 +5,7 @@
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
-        "generate": "nuxt generate",
+        "generate": "nuxt generate && del /Q/S docs && Xcopy \".output/public\" \"docs\"  /s /e /y /i",
         "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
         "format": "prettier --write .",
@@ -23,6 +23,7 @@
     "devDependencies": {
         "@nuxt/eslint": "^0.7.1",
         "@nuxtjs/tailwindcss": "^6.12.2",
+        "@vite-pwa/nuxt": "^0.10.6",
         "eslint": "^9.15.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",
