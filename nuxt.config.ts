@@ -27,6 +27,7 @@ export default defineNuxtConfig({
             name: 'Sbep Lift',
             short_name: 'SL',
             theme_color: '#282828',
+            start_url: '/',
             icons: [
                 {
                     src: '/icon-192x192.png',
@@ -40,6 +41,7 @@ export default defineNuxtConfig({
                 },
             ],
         },
+        registerWebManifestInRouteRules: true,
         workbox: {
             navigateFallback: '/',
         },
