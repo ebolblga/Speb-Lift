@@ -33,6 +33,7 @@ useHead({
 body {
     font-size: 14px;
     font-family: Fara Code;
+    background-color: #282828;
 }
 
 @font-face {

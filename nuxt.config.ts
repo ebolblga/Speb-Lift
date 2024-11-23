@@ -24,8 +24,8 @@ export default defineNuxtConfig({
     },
     pwa: {
         manifest: {
-            name: 'Sbep Lift',
-            short_name: 'SL',
+            name: 'Speb Lift',
+            short_name: 'Speb Lift',
             theme_color: '#282828',
             start_url: '/',
             icons: [

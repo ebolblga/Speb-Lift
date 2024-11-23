@@ -2,6 +2,10 @@
 import { useLocalStorage } from '@vueuse/core'
 import { Direction, Station, type Record } from '@types'
 
+useSeoMeta({
+    title: 'Timer',
+})
+
 const isTimerRunning = ref<boolean>(false)
 const isTimerPaused = ref<boolean>(true)
 const timeElapsed = ref<number>(0)

@@ -2,6 +2,10 @@
 import { useLocalStorage } from '@vueuse/core'
 import { Direction, Station, type Record } from '@types'
 
+useSeoMeta({
+    title: 'Stats',
+})
+
 const records = useLocalStorage<Record[]>('my-records', [])
 const displayStats = ref<string>('')
 

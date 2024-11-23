@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { Direction, Station, type Record } from '@types' // Adjust import path as necessary
+import { Direction, Station, type Record } from '@types'
 
 const props = defineProps<{
     record: Record
 }>()
 
 const emit = defineEmits<{
-    (e: 'update:record', updatedRecord: Record): void
-    (e: 'delete:record', record: Record): void
+    (e: 'update:record' | 'delete:record', updatedRecord: Record): void
 }>()
 
 const handleDirectionChange = (value: string | number | null) => {
@@ -32,8 +31,8 @@ const handleDelete = () => {
 
 <template>
     <div
-        class="w-full rounded-md bg-background2 flex flex-row items-center justify-evenly">
-        <p class="w-[80px]">{{ record.seconds }} sec</p>
+        class="w-full rounded-md bg-background2 flex flex-row items-center justify-evenly text-xs">
+        <p class="min-w-[60px]">{{ record.seconds }} sec</p>
         <div class="flex flex-row w-[200px]">
             <BaseSelect
                 :id="'direction_' + record.id"
@@ -48,8 +47,8 @@ const handleDelete = () => {
         </div>
         <p>{{ record.date }}</p>
         <button
-            @click="handleDelete"
-            class="flex items-center justify-center bg-red rounded-lg w-[24px] h-[24px] hover:bg-background2 hover:border-red hover:border-2">
+            class="flex items-center justify-center bg-red rounded-lg w-[24px] h-[24px] hover:bg-background2 hover:border-red hover:border-2"
+            @click="handleDelete">
             <Icon name="iconoir:cancel" size="24" />
         </button>
     </div>
