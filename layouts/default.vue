@@ -26,6 +26,7 @@ useHead({
 <template>
     <div class="m-0 p-3 bg-background h-screen text-text">
         <slot />
+        <TheNavbar />
     </div>
 </template>
 <style>
@@ -42,22 +43,22 @@ body {
     font-display: swap;
 }
 
-.scrollbar::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 
-.scrollbar::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     box-shadow: transparent;
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: 4px;
 }
 
-.scrollbar::-webkit-scrollbar-corner {
+::-webkit-scrollbar-corner {
     background: transparent;
 }
 </style>

@@ -1,4 +1,5 @@
 export interface Record {
+    id: number
     direction: Direction
     seconds: number
     date: Date

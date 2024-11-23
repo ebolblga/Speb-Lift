@@ -17,7 +17,6 @@ const handleChange = (event: Event) => {
     emit('update:modelValue', selectedValue)
 }
 </script>
-
 <template>
     <select
         id="id"

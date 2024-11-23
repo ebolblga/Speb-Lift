@@ -1,9 +1,10 @@
 export const colors = {
-    text: '#F8F1E2',
+    text: '#f8f1e2',
     background: '#282828',
-    background2: '#1D2021',
-    primary: '#E6CF90',
+    background2: '#1d2021',
+    primary: '#e6cf90',
     secondary: '#836117',
-    accent: '#FABD2F',
-    chart: '#69B3A2',
+    accent: '#fabd2f',
+    chart: '#69b3a2',
+    red: '#fa5e2f',
 }

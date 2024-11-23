@@ -35,6 +35,11 @@ function timerCleanup() {
     timeElapsed.value = 0
 }
 
+function getId(): number {
+    if (records.value.length < 1) return 0
+    else return records.value[records.value.length - 1].id + 1
+}
+
 function saveRecord() {
     if (timeElapsed.value === 0) {
         console.warn('Not enough time has passed')
@@ -42,6 +47,7 @@ function saveRecord() {
     }
 
     const newRecord: Record = {
+        id: getId(),
         direction: selectedDirection.value,
         seconds: timeElapsed.value,
         date: new Date(),

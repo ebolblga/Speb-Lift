@@ -1,75 +1,20 @@
-# Nuxt Minimal Starter
+# Speb-Lift
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Small utility I needed to minimize average travel time, don't mind checking this project out...
 
-## Setup
-
-Make sure to install dependencies:
+### Setup with [Node.js](https://nodejs.org/en/)
 
 ```bash
-# npm
-npm install
+# install yarn
+npm install --global yarn
 
-# pnpm
-pnpm install
+# install all dependencies
+yarn
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
+# start project in dev mode
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+### License
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+This program is licensed under the MIT License. Please read the License file to know about the usage terms and conditions.
