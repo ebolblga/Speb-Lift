@@ -22,4 +22,26 @@ export default defineNuxtConfig({
     alias: {
         '@types': resolve(__dirname, './types/types.ts'),
     },
+    pwa: {
+        manifest: {
+            name: 'Sbep Lift',
+            short_name: 'SL',
+            theme_color: '#282828',
+            icons: [
+                {
+                    src: '/icon-192x192.png',
+                    sizes: '192x192',
+                    type: 'image/png',
+                },
+                {
+                    src: '/icon-512x512.png',
+                    sizes: '512x512',
+                    type: 'image/png',
+                },
+            ],
+        },
+        workbox: {
+            navigateFallback: '/',
+        },
+    },
 })
