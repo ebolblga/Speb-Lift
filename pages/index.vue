@@ -10,20 +10,34 @@ const isTimerRunning = ref<boolean>(false)
 const isTimerPaused = ref<boolean>(true)
 const timeElapsed = ref<number>(0)
 let interval: ReturnType<typeof setInterval>
+let startTime = 0
+let pausedTime = 0
+
 const selectedDirection = ref<Direction>(Direction.up)
 const selectedStation = ref<Station>(Station.top)
 const records = useLocalStorage<Record[]>('my-records', [])
 
 function handleTimer() {
     if (isTimerPaused.value) {
-        interval = setInterval(() => {
-            timeElapsed.value++
-        }, 1000)
+        if (!isTimerRunning.value) {
+            startTime = Date.now()
+        } else {
+            startTime += Date.now() - pausedTime
+        }
+
+        const updateElapsedTime = () => {
+            const now = Date.now()
+            timeElapsed.value = Math.floor((now - startTime) / 1000)
+        }
+
+        interval = setInterval(updateElapsedTime, 1000)
+        updateElapsedTime()
 
         isTimerRunning.value = true
         isTimerPaused.value = false
     } else {
         clearInterval(interval)
+        pausedTime = Date.now()
         isTimerPaused.value = true
     }
 }
@@ -37,6 +51,8 @@ function timerCleanup() {
     isTimerRunning.value = false
     isTimerPaused.value = true
     timeElapsed.value = 0
+    startTime = 0
+    pausedTime = 0
 }
 
 function getId(): number {

@@ -5,6 +5,5 @@ export const colors = {
     primary: '#e6cf90',
     secondary: '#836117',
     accent: '#fabd2f',
-    chart: '#69b3a2',
     red: '#fa5e2f',
 }

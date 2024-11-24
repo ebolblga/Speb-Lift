@@ -31,7 +31,7 @@ const handleDelete = () => {
 
 <template>
     <div
-        class="w-full rounded-md bg-background2 flex flex-row items-center justify-evenly text-xs">
+        class="w-full bg-background2 flex flex-row items-center justify-evenly text-xs border-b-[1px] border-background">
         <p class="min-w-[60px]">{{ record.seconds }} sec</p>
         <div class="flex flex-row w-[200px]">
             <BaseSelect
