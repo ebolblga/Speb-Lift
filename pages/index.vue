@@ -17,6 +17,15 @@ const selectedDirection = ref<Direction>(Direction.up)
 const selectedStation = ref<Station>(Station.top)
 const records = useLocalStorage<Record[]>('my-records', [])
 
+onMounted(() => {
+    // Select default direction opposite of last record
+    if (records.value[records.value.length - 1].direction === Direction.up) {
+        selectedDirection.value = Direction.down
+    } else {
+        selectedDirection.value = Direction.up
+    }
+})
+
 function handleTimer() {
     if (isTimerPaused.value) {
         if (!isTimerRunning.value) {
@@ -82,6 +91,9 @@ function saveRecord() {
 <template>
     <div class="h-full flex justify-center">
         <div class="w-[85vw] max-w-[900px] my-auto pb-24">
+            <NuxtImg
+                src="/icon-512x512.png"
+                class="mx-auto max-w-[20%] mb-11" />
             <TheTimer :seconds="timeElapsed" />
             <div class="flex flex-row">
                 <BaseButton @click="handleTimer">

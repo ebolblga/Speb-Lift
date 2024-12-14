@@ -113,7 +113,7 @@ function recalculateStats(): string {
 <template>
     <div class="flex justify-center flex-col">
         <div
-            class="max-h-[80vh] w-[85vw] max-w-[900px] min-w-[370px] overflow-auto p-3 bg-background2 rounded-md mx-auto">
+            class="max-h-[75vh] w-[85vw] max-w-[900px] min-w-[370px] overflow-auto p-3 bg-background2 rounded-md mx-auto">
             <ClientOnly fallback-tag="span" fallback="Loading stats...">
                 <ul>
                     <li v-for="record in records" :key="record.id">
