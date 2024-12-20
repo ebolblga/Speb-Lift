@@ -61,7 +61,7 @@ function recalculateStats(): string {
     const arrayUpBottom = records.value.filter((element) => {
         return (
             element.direction === Direction.up &&
-            element.station === Station.bottom
+            element.station === Station.s28
         )
     })
     const average2 =
@@ -73,7 +73,7 @@ function recalculateStats(): string {
     const arrayUpTop = records.value.filter((element) => {
         return (
             element.direction === Direction.up &&
-            element.station === Station.top
+            element.station === Station.s32
         )
     })
     const average3 =
@@ -85,7 +85,7 @@ function recalculateStats(): string {
     const arrayDownBottom = records.value.filter((element) => {
         return (
             element.direction === Direction.down &&
-            element.station === Station.bottom
+            element.station === Station.s28
         )
     })
     const average4 =
@@ -97,7 +97,7 @@ function recalculateStats(): string {
     const arrayDownTop = records.value.filter((element) => {
         return (
             element.direction === Direction.down &&
-            element.station === Station.top
+            element.station === Station.s32
         )
     })
     const average5 =

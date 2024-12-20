@@ -10,11 +10,11 @@ const isTimerRunning = ref<boolean>(false)
 const isTimerPaused = ref<boolean>(true)
 const timeElapsed = ref<number>(0)
 let interval: ReturnType<typeof setInterval>
-let startTime = 0
-let pausedTime = 0
+const startTime = useLocalStorage<number>('start-time', 0)
+const pausedTime = useLocalStorage<number>('paused-time', 0)
 
 const selectedDirection = ref<Direction>(Direction.up)
-const selectedStation = ref<Station>(Station.top)
+const selectedStation = ref<Station>(Station.s32)
 const records = useLocalStorage<Record[]>('my-records', [])
 
 onMounted(() => {
@@ -24,29 +24,30 @@ onMounted(() => {
     } else {
         selectedDirection.value = Direction.up
     }
+
+    if (startTime.value !== 0) restartTimer()
 })
+
+const updateElapsedTime = () => {
+    const now = Date.now()
+    timeElapsed.value = Math.floor((now - startTime.value) / 1000)
+}
 
 function handleTimer() {
     if (isTimerPaused.value) {
         if (!isTimerRunning.value) {
-            startTime = Date.now()
+            startTime.value = Date.now()
         } else {
-            startTime += Date.now() - pausedTime
+            startTime.value += Date.now() - pausedTime.value
         }
 
-        const updateElapsedTime = () => {
-            const now = Date.now()
-            timeElapsed.value = Math.floor((now - startTime) / 1000)
-        }
-
-        interval = setInterval(updateElapsedTime, 1000)
         updateElapsedTime()
-
+        interval = setInterval(updateElapsedTime, 1000)
         isTimerRunning.value = true
         isTimerPaused.value = false
     } else {
         clearInterval(interval)
-        pausedTime = Date.now()
+        pausedTime.value = Date.now()
         isTimerPaused.value = true
     }
 }
@@ -60,8 +61,8 @@ function timerCleanup() {
     isTimerRunning.value = false
     isTimerPaused.value = true
     timeElapsed.value = 0
-    startTime = 0
-    pausedTime = 0
+    startTime.value = 0
+    pausedTime.value = 0
 }
 
 function getId(): number {
@@ -87,6 +88,15 @@ function saveRecord() {
 
     records.value.push(newRecord)
 }
+
+// Starts timer again if website was reloaded
+function restartTimer() {
+    updateElapsedTime()
+    interval = setInterval(updateElapsedTime, 1000)
+    isTimerRunning.value = true
+    isTimerPaused.value = false
+}
+
 </script>
 <template>
     <div class="h-full flex justify-center">

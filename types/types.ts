@@ -12,6 +12,7 @@ export enum Direction {
 }
 
 export enum Station {
-    top = '32',
-    bottom = '28',
+    s33 = '33',
+    s32 = '32',
+    s28 = '28',
 }

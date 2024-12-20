@@ -21,7 +21,7 @@ const handleChange = (event: Event) => {
     <select
         id="id"
         :value="modelValue"
-        class="w-full bg-background2 border border-primary rounded-md p-1 m-2"
+        class="w-full h-[32px] bg-background2 border border-primary rounded-md p-1 m-2"
         @change="handleChange">
         <option v-for="option in options" :key="option" :value="option">
             {{ option }}
