@@ -11,7 +11,7 @@ const isTimerPaused = ref<boolean>(true)
 const timeElapsed = ref<number>(0)
 let interval: ReturnType<typeof setInterval>
 const startTime = useLocalStorage<number>('start-time', 0)
-const pausedTime = useLocalStorage<number>('paused-time', 0)
+let pausedTime = 0
 
 const selectedDirection = ref<Direction>(Direction.up)
 const selectedStation = ref<Station>(Station.s32)
@@ -38,7 +38,7 @@ function handleTimer() {
         if (!isTimerRunning.value) {
             startTime.value = Date.now()
         } else {
-            startTime.value += Date.now() - pausedTime.value
+            startTime.value += Date.now() - pausedTime
         }
 
         updateElapsedTime()
@@ -47,7 +47,7 @@ function handleTimer() {
         isTimerPaused.value = false
     } else {
         clearInterval(interval)
-        pausedTime.value = Date.now()
+        pausedTime = Date.now()
         isTimerPaused.value = true
     }
 }
@@ -62,7 +62,7 @@ function timerCleanup() {
     isTimerPaused.value = true
     timeElapsed.value = 0
     startTime.value = 0
-    pausedTime.value = 0
+    pausedTime = 0
 }
 
 function getId(): number {
