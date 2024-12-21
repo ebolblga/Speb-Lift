@@ -15,7 +15,7 @@ onMounted(async () => {
 
 // TODO: rewrite this ugly function
 function recalculateStats(): string {
-    if (!records.value.length) return ''
+    if (!records.value.length) return 'No data recorded yet.'
 
     let outputStr: string = ''
     const totalSum = records.value.reduce((accumulator, value) => {

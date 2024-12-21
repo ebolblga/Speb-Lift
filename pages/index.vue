@@ -18,14 +18,19 @@ const selectedStation = ref<Station>(Station.s32)
 const records = useLocalStorage<Record[]>('my-records', [])
 
 onMounted(() => {
+    if (startTime.value !== 0) {
+        restartTimer()
+        return
+    }
+
     // Select default direction opposite of last record
+    if (records.value.length === 0) return
+
     if (records.value[records.value.length - 1].direction === Direction.up) {
         selectedDirection.value = Direction.down
     } else {
         selectedDirection.value = Direction.up
     }
-
-    if (startTime.value !== 0) restartTimer()
 })
 
 const updateElapsedTime = () => {
