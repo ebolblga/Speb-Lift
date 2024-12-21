@@ -11,7 +11,7 @@ const isTimerPaused = ref<boolean>(true)
 const timeElapsed = ref<number>(0)
 let interval: ReturnType<typeof setInterval>
 const startTime = useLocalStorage<number>('start-time', 0)
-let pausedTime = 0
+const pausedTime = useLocalStorage<number>('paused-time', 0)
 
 const selectedDirection = ref<Direction>(Direction.up)
 const selectedStation = ref<Station>(Station.s32)
@@ -38,16 +38,17 @@ function handleTimer() {
         if (!isTimerRunning.value) {
             startTime.value = Date.now()
         } else {
-            startTime.value += Date.now() - pausedTime
+            startTime.value += Date.now() - pausedTime.value
         }
 
         updateElapsedTime()
         interval = setInterval(updateElapsedTime, 1000)
         isTimerRunning.value = true
         isTimerPaused.value = false
+        pausedTime.value = 0
     } else {
         clearInterval(interval)
-        pausedTime = Date.now()
+        pausedTime.value = Date.now()
         isTimerPaused.value = true
     }
 }
@@ -62,7 +63,7 @@ function timerCleanup() {
     isTimerPaused.value = true
     timeElapsed.value = 0
     startTime.value = 0
-    pausedTime = 0
+    pausedTime.value = 0
 }
 
 function getId(): number {
@@ -91,10 +92,16 @@ function saveRecord() {
 
 // Starts timer again if website was reloaded
 function restartTimer() {
-    updateElapsedTime()
-    interval = setInterval(updateElapsedTime, 1000)
-    isTimerRunning.value = true
-    isTimerPaused.value = false
+    if (pausedTime.value > 0) {
+        timeElapsed.value = Math.floor((pausedTime.value - startTime.value) / 1000)
+        isTimerRunning.value = true
+        isTimerPaused.value = true
+    } else {
+        updateElapsedTime()
+        interval = setInterval(updateElapsedTime, 1000)
+        isTimerRunning.value = true
+        isTimerPaused.value = false
+    }
 }
 
 </script>
