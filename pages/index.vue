@@ -3,7 +3,7 @@ import { useLocalStorage } from '@vueuse/core'
 import { Direction, Station, type Record } from '@types'
 
 useSeoMeta({
-    title: 'Timer',
+    title: 'SL: timer',
 })
 
 const isTimerRunning = ref<boolean>(false)
@@ -93,7 +93,9 @@ function saveRecord() {
 // Starts timer again if website was reloaded
 function restartTimer() {
     if (pausedTime.value > 0) {
-        timeElapsed.value = Math.floor((pausedTime.value - startTime.value) / 1000)
+        timeElapsed.value = Math.floor(
+            (pausedTime.value - startTime.value) / 1000
+        )
         isTimerRunning.value = true
         isTimerPaused.value = true
     } else {
@@ -103,7 +105,6 @@ function restartTimer() {
         isTimerPaused.value = false
     }
 }
-
 </script>
 <template>
     <div class="h-full flex justify-center">

@@ -8,6 +8,15 @@ const isActive = (path) => route.path === path
     <div class="fixed bottom-0 left-0 w-full h-[8vh] bg-background2">
         <div
             class="mx-auto h-full lg:w-[40vw] md:w-[90vw] flex flex-row justify-around">
+            <NuxtLink to="/stats" title="Statistics" class="my-auto">
+                <Icon
+                    name="bitcoin-icons:graph-filled"
+                    size="48"
+                    :class="{
+                        'text-accent': isActive('/stats'),
+                        'text-primary': !isActive('/stats'),
+                    }" />
+            </NuxtLink>
             <NuxtLink to="/" title="Timer" class="my-auto">
                 <Icon
                     name="material-symbols:timer-outline"
@@ -17,13 +26,13 @@ const isActive = (path) => route.path === path
                         'text-primary': !isActive('/'),
                     }" />
             </NuxtLink>
-            <NuxtLink to="/stats" title="Statistics" class="my-auto">
+            <NuxtLink to="/export" title="Export" class="my-auto">
                 <Icon
-                    name="bitcoin-icons:graph-filled"
+                    name="lets-icons:export"
                     size="48"
                     :class="{
-                        'text-accent': isActive('/stats'),
-                        'text-primary': !isActive('/stats'),
+                        'text-accent': isActive('/export'),
+                        'text-primary': !isActive('/export'),
                     }" />
             </NuxtLink>
         </div>
