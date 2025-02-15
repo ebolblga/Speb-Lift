@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core'
-import { Direction, Station, type Record } from '@types'
+import { Direction, Station, stationColorMap, type Record } from '@types'
 
 useSeoMeta({
     title: 'SL: stats',
@@ -8,10 +8,21 @@ useSeoMeta({
 
 const records = useLocalStorage<Record[]>('my-records', [])
 const displayStats = ref<string>('')
+const windowWidth = ref(0)
 
 onMounted(async () => {
     displayStats.value = recalculateStats()
+    windowWidth.value = window.innerWidth
+    window.addEventListener('resize', handleResize)
 })
+
+onUnmounted(async () => {
+    window.removeEventListener('resize', handleResize)
+})
+
+function handleResize() {
+    windowWidth.value = window.innerWidth
+}
 
 // TODO: rewrite this ugly function
 function recalculateStats(): string {
@@ -102,6 +113,24 @@ function recalculateStats(): string {
     <div class="flex justify-center flex-col">
         <div class="mx-auto">
             <pre>{{ displayStats }}</pre>
+        </div>
+        <ClientOnly fallback-tag="span" fallback="Loading stats...">
+            <BaseHourlyChart
+                :data="records"
+                :direction="Direction.up"
+                :window-width="windowWidth" />
+            <BaseHourlyChart
+                :data="records"
+                :direction="Direction.down"
+                :window-width="windowWidth" />
+        </ClientOnly>
+        <div class="flex gap-2 text-sm justify-center">
+            <span
+                v-for="station in Object.values(Station)"
+                :key="station"
+                :style="{ color: stationColorMap[station] }">
+                {{ station }}
+            </span>
         </div>
     </div>
 </template>
