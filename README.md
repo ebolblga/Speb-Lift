@@ -1,8 +1,12 @@
 # Speb-Lift
 
-## Small utility I needed to minimize average travel time, don't mind checking this project out...
+## Small utility I needed to minimize average travel time between floors, don't mind checking this project out...
 
-![image](https://github.com/user-attachments/assets/42f7fdd0-1849-4f84-af29-69ba97a11247)
+![image](https://github.com/user-attachments/assets/905e46af-f5f2-4b15-be24-20fc39bd3215)
+
+![image](https://github.com/user-attachments/assets/bf2d4a0a-ce0a-42f5-917a-126bc93057a2)
+
+![image](https://github.com/user-attachments/assets/454fbc6f-54fe-4716-8776-71ba1b42b796)
 
 ### Setup with [Node.js](https://nodejs.org/en/)
 
