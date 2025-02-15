@@ -4,6 +4,8 @@ import { ref, onMounted, watch } from 'vue'
 import { Station, stationColorMap } from '@types'
 import type { Record, StationAverages, Direction } from '@types'
 
+const PADDING = 48
+
 const props = defineProps<{
     data: Record[]
     direction: Direction
@@ -80,7 +82,7 @@ const drawChart = (newWidth: number) => {
     const data = processData()
 
     const margin = { top: 20, right: 30, bottom: 30, left: 40 }
-    const width = newWidth - 100 - margin.left - margin.right
+    const width = newWidth - PADDING - margin.left - margin.right
     const height = 256 - margin.top - margin.bottom
 
     const svg = d3
