@@ -78,6 +78,68 @@ const processData = () => {
     return averages
 }
 
+function interpolateValues(
+    data: StationAverages[],
+    station: Station
+): number[] {
+    const n = data.length
+
+    const values = data.map((d) => d[station])
+    // If all values are missing, return the original values
+    if (values.every((v) => v === 0)) return values.slice()
+
+    // Helper: find the next valid index (cyclic)
+    function findNextValid(index: number): number {
+        let i = (index + 1) % n
+        while (values[i] === 0 && i !== index) {
+            i = (i + 1) % n
+        }
+
+        return i
+    }
+
+    // Make a copy to store the interpolated values
+    const result = values.slice()
+
+    let i = 0
+    while (i < n) {
+        if (result[i] !== 0) {
+            i++
+            continue
+        }
+        // We've hit a gap starting at index i
+        // Find the previous valid index (cyclic)
+        let prev = (i - 1 + n) % n
+        while (values[prev] === 0 && prev !== i) {
+            prev = (prev - 1 + n) % n
+        }
+        const startVal = values[prev]
+
+        // Find the next valid index
+        const next = findNextValid(i)
+        const endVal = values[next]
+
+        // Compute the total number of steps between the valid endpoints
+        // Because data is cyclic, use modulo arithmetic
+        const totalSteps = (next - prev + n) % n
+
+        // Fill in all missing points between prev and next
+        let step = 1
+        let idx = (prev + 1) % n
+        while (idx !== next) {
+            // t ranges from 0 (at prev) to 1 (at next)
+            const t = step / totalSteps
+            result[idx] = startVal + t * (endVal - startVal)
+            idx = (idx + 1) % n
+            step++
+        }
+        // Continue scanning from the next valid index
+        i = next
+    }
+
+    return result
+}
+
 const drawChart = (newWidth: number) => {
     const data = processData()
 
@@ -132,6 +194,30 @@ const drawChart = (newWidth: number) => {
             .attr('width', barWidth - 1)
             .attr('height', (d) => height - y(d[station]))
             .attr('fill', stationColorMap[station])
+            .attr('fill-opacity', 0.25)
+
+        const interpValues = interpolateValues(data, station)
+
+        const lineData = data.map((d, i) => ({
+            hour: d.hour,
+            value: interpValues[i],
+        }))
+
+        // Create the line generator.
+        const lineGenerator = d3
+            .line<(typeof lineData)[0]>()
+            // Center the line on each bar.
+            .x((d) => x(d.hour)! + index + barWidth + (barWidth - 1) / 2)
+            .y((d) => y(d.value))
+            .curve(d3.curveBasis)
+
+        svg.append('path')
+            .datum(lineData)
+            .attr('fill', 'none')
+            .attr('stroke', stationColorMap[station])
+            .attr('stroke-width', 2)
+            .attr('stroke-opacity', 1)
+            .attr('d', lineGenerator)
     })
 }
 </script>
