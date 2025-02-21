@@ -13,8 +13,8 @@ let interval: ReturnType<typeof setInterval>
 const startTime = useLocalStorage<number>('start-time', 0)
 const pausedTime = useLocalStorage<number>('paused-time', 0)
 
-const selectedDirection = ref<Direction>(Direction.up)
-const selectedStation = ref<Station>(Station.s32)
+const selectedDirection = useLocalStorage<Direction>('selected-direction', Direction.up)
+const selectedStation = useLocalStorage<Station>('selected-station', Station.s32)
 const records = useLocalStorage<Record[]>('my-records', [])
 
 onMounted(() => {
@@ -26,11 +26,12 @@ onMounted(() => {
     // Select default direction opposite of last record
     if (records.value.length === 0) return
 
-    if (records.value[records.value.length - 1].direction === Direction.up) {
-        selectedDirection.value = Direction.down
-    } else {
-        selectedDirection.value = Direction.up
-    }
+    // TODO: put best path prediction logic here
+    // if (records.value[records.value.length - 1].direction === Direction.up) {
+    //     selectedDirection.value = Direction.down
+    // } else {
+    //     selectedDirection.value = Direction.up
+    // }
 })
 
 const updateElapsedTime = () => {
