@@ -20,6 +20,10 @@ const vacations: DateRange[] = [
     { start: new Date(2025, 9, 20), end: new Date(2025, 9, 26) },
 ]
 
+const extraDays: DateRange[] = [
+    { start: new Date(2025, 10, 1), end: new Date(2025, 10, 1) },
+]
+
 const attributes = [
     {
         key: 'today',
@@ -64,12 +68,31 @@ const attributes = [
             },
         ],
     },
+    {
+        key: 'payout',
+        content: 'orange',
+        dates: [
+            {
+                start: new Date(2024, 9, 20),
+                repeat: {
+                    every: "month",
+                    days: [5, 20],
+                },
+            },
+        ],
+    },
     ...vacations.map((dateRange) => {
         return {
             highlight: 'green',
             dates: dateRange,
         }
     }),
+    ...extraDays.map((dateRage) => {
+        return {
+            dot: 'gray',
+            dates: dateRage,
+        }
+    })
 ]
 </script>
 <template>
