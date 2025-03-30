@@ -30,7 +30,7 @@ export const stationColorMap: { [key in Station]: string } = {
     [Station.s33]: '#4ccdcf',
 }
 
-export interface DisabledDate {
+export interface DateRange {
     start: Date | null
     end: Date | null
 }

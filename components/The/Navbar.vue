@@ -38,7 +38,7 @@ const isActive = (path) => route.path === path
             <NuxtLink to="/calendar" title="Calendar" class="my-auto">
                 <Icon
                     name="lets-icons:calendar"
-                    size="48"
+                    size="42"
                     :class="{
                         'text-accent': isActive('/calendar'),
                         'text-primary': !isActive('/calendar'),

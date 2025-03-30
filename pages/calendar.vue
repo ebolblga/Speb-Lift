@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DatePicker } from 'v-calendar'
 import 'v-calendar/style.css'
-import type { DisabledDate } from '@types'
+import type { DateRange } from '@types'
 
 useSeoMeta({
     title: 'SL: calendar',
@@ -9,9 +9,15 @@ useSeoMeta({
 
 const startDate = new Date(2024, 9, 15)
 
-const disabledDates: DisabledDate[] = [
+const disabledDates: DateRange[] = [
     // Disable all before start date
     { start: null, end: startDate },
+]
+
+const vacations: DateRange[] = [
+    { start: new Date(2025, 4, 5), end: new Date(2025, 4, 7) },
+    { start: new Date(2025, 5, 23), end: new Date(2025, 6, 6) },
+    { start: new Date(2025, 9, 20), end: new Date(2025, 9, 26) },
 ]
 
 const attributes = [
@@ -58,6 +64,12 @@ const attributes = [
             },
         ],
     },
+    ...vacations.map((dateRange) => {
+        return {
+            highlight: 'green',
+            dates: dateRange,
+        }
+    }),
 ]
 </script>
 <template>
