@@ -15,7 +15,6 @@ const disabledDates: DateRange[] = [
 ]
 
 const vacations: DateRange[] = [
-    { start: new Date(2025, 4, 5), end: new Date(2025, 4, 7) },
     { start: new Date(2025, 5, 23), end: new Date(2025, 6, 6) },
     { start: new Date(2025, 9, 20), end: new Date(2025, 9, 26) },
 ]
