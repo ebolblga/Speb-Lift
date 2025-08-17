@@ -15,8 +15,8 @@ const disabledDates: DateRange[] = [
 ]
 
 const vacations: DateRange[] = [
-    { start: new Date(2025, 6, 28), end: new Date(2025, 7, 10) },
-    { start: new Date(2025, 9, 20), end: new Date(2025, 9, 26) },
+    // { start: new Date(2025, 6, 28), end: new Date(2025, 7, 10) },
+    // { start: new Date(2025, 9, 20), end: new Date(2025, 9, 26) },
 ]
 
 const extraDays: DateRange[] = [
@@ -46,12 +46,12 @@ const attributes = [
                     weekdays: 4,
                 },
             },
-                        {
-                start: new Date(2025, 3, 20),
-                repeat: {
-                    weekdays: [1],
-                },
-            },
+            // {
+            //     start: new Date(2025, 3, 20),
+            //     repeat: {
+            //         weekdays: [1],
+            //     },
+            // },
         ],
     },
     {
